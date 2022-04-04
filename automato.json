@@ -1,0 +1,26 @@
+{
+  "estados":[
+    {
+      "nome": "estado1",
+      "links":[{
+        "fim": "estado1",
+        "simbolos": ["a", "b", "c"]
+      }],
+      "acceptedState": false
+    },
+    {
+      "nome": "estado2",
+      "links":[{
+        "fim": "estado2",
+        "simbolos": ["a", "b", "c"]
+      }]
+    },
+    {
+      "nome": "estado3",
+      "links":[{
+        "fim": "estado3",
+        "simbolos": ["a", "b", "c"]
+      }]
+    }
+  ]
+}
