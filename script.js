@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
       acceptanceState: false,
       selected: false,
       createLink: false,
+      clicked: false,
     })
   }
 
@@ -113,21 +114,38 @@ document.addEventListener('DOMContentLoaded', function () {
   }, false)
 
   canva.addEventListener('click', function (e) {
+    automato.estados.forEach(state => {
+      state.clicked = false;
+    })
     const stateClicked = automato.estados.findIndex(state => {
       if (Math.abs(state.x - e.offsetX) < radius && Math.abs(state.y - e.offsetY) < radius) {
+        state.clicked = true;
         return true;
       }
     })
 
     if (stateClicked == -1) return;
-
-    if (automato.estados[stateClicked].createLink) {
-      automato.estados[stateClicked].createLink = false;
-      createLinkState = -1;
-    } else {
-      automato.estados[stateClicked].selected = false;
-    }
   }, false)
+
+  window.addEventListener('keydown', function (e) {
+    const stateClicked = automato.estados.findIndex(state => {
+      if (state.clicked)
+        return true;
+    })
+
+    if (stateClicked == -1) return;
+
+    console.log(automato.estados[stateClicked])
+    console.log(automato.estados[stateClicked])
+    console.log(e.key);
+    if (e.key == 'Backspace')
+      automato.estados[stateClicked].label = automato.estados[stateClicked].label.slice(0, -1);
+    else if (e.key == 'Enter')
+      automato.estados[stateClicked].clicked = false;
+    else
+      automato.estados[stateClicked].label += e.key;
+
+  })
 
   const drawLine = (line) => {
     ctx.beginPath();
